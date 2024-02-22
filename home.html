@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copia y pega el enlace de IMDb</title>
+</head>
+<body>
+    <label for="imdb-link">Pega el enlace de IMDb:</label>
+    <input type="text" id="imdb-link" placeholder="https://www.imdb.com/title/tt0944947/">
+    
+    <button onclick="getDataFromWebPage()">Obtener datos</button>
+
+    <script>
+        async function getDataFromWebPage() {
+            const imdbLink = document.getElementById('imdb-link').value;
+
+            const response = await fetch('/getDataFromWebPage', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ imdbLink })
+            });
+
+            const data = await response.json();
+            console.log(data);
+        }
+    </script>
+</body>
+</html>
